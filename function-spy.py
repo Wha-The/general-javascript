@@ -10,4 +10,4 @@ def abc(d,e,f): print(d,e,f)
 dump["abc"] = abc
 
 attach(dump)
-dump.["abc"]("1",2,3)
+dump["abc"]("1",2,3)
