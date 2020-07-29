@@ -5,9 +5,9 @@ def attach(level):
           v(*a**k)
       level[i]=replaceddef
     
-cmd = {}
+dump = {}
 def abc(d,e,f): print(d,e,f)
-cmd.abc = abc
+dump["abc"] = abc
 
-attach(cmd)
-cmd.abc("1",2,3)
+attach(dump)
+dump.["abc"]("1",2,3)
