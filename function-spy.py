@@ -6,7 +6,7 @@ class Event():
     return self.dispatchevent(a,k)
 
 def attach(level):
-  for i,v in level.values():
+  for i,v in level.items():
       level[i]=Event(v)
     
 dump = {}
