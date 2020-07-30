@@ -1,3 +1,9 @@
+NOREPEATS = [
+"NOREPEATS",
+"Event",
+"attach"
+]
+
 class Event():
   def __init__(self,dispatchevent):
     self.event = dispatchevent
@@ -9,11 +15,11 @@ class Event():
 
 def attach(level):
   for i,v in level.items():
-      level[i]=Event(v)
-    
-dump = {}
-def abc(d,e,f): print(d,e,f)
-dump["abc"] = abc
+      if callable(i) and i not in NOREPEATS:
+         level[i]=Event(v)
+  
+def abc(d):print(d+5)  
+  
+attach(globals())
 
-attach(dump)
-dump["abc"]("1",2,3)
+abc(5)
