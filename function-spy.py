@@ -1,10 +1,9 @@
-import time
 NOREPEATS = [
 "NOREPEATS",
 "Event",
-"attach"
+"attach",
+"lastabc"
 ]
-
 class Event(object):
   def __init__(self,dispatchevent,dispatcheventname):
     self.event = dispatchevent
@@ -27,7 +26,10 @@ def attach(*levels):
         if callable(v) and i not in NOREPEATS:
           level[i]=Event(v,i)
   
-def abc(d):return d+5 
-labc = abc
+
+def abc(d): return d+5 
+lastabc = abc
+
 attach(globals())
-print(abc(15))
+
+print lastabc==abc
