@@ -21,15 +21,13 @@ class Event(object):
   def __str__(self):return repr(self)
   def __int__(self): return int(self)
 
-def attach(level):
-  for i,v in level.items():
-      if callable(v) and i not in NOREPEATS:
-        level[i]=Event(v,i)
-  return level
+def attach(*levels):
+  for level in levels:
+    for i,v in level.items():
+        if callable(v) and i not in NOREPEATS:
+          level[i]=Event(v,i)
   
 def abc(d):return d+5 
 labc = abc
-slep = time.sleep
 attach(globals())
-slep(5)
 print(abc(15))
