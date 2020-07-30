@@ -17,9 +17,10 @@ def attach(level):
   for i,v in level.items():
       if callable(i) and i not in NOREPEATS:
          level[i]=Event(v)
+  return level
   
 def abc(d):print(d+5)  
   
-attach(globals())
+globals() = attach(globals())
 
 abc(5)
