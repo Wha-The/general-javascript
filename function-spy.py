@@ -29,10 +29,23 @@ class Event(object):
   def __int__(self): return int(self)
 
 def attach(*levels):
+  OriginalTypeFunction = type
+  def patchedtype(instance):
+    result = OriginalTypeFunction(instance)
+    if OriginalTypeFunction(instance)==Event:
+      result = instance.event
+    return result
+
   for level in levels:
     for i,v in level.items():
         if callable(v) and i not in NOREPEATS:
           level[i]=Event(v,i)
+
+    # Patch type
+    if level["type"]==OriginalTypeFunction:
+      level["type"]=patchedtype
+
+
   
 
 def abc(d): return d+5 
