@@ -15,6 +15,14 @@ class Event(object):
     return evt(*a,**k)
   def __compareresults(self,other,operator):
     return eval("self.event %s other"%operator)
+  def __eq__(self,other): return self.__compareresults(other,"==")
+  def __ne__(self,other): return self.__compareresults(other,"!=")
+  def __lt__(self,other): return self.__compareresults(other,"<")
+  def __gt__(self,other): return self.__compareresults(other,">")
+  def __le__(self,other): return self.__compareresults(other,"<=")
+  def __ge__(self,other): return self.__compareresults(other,">=")
+  
+  
   def __repr__(self):
     return str(self.event)
   def __str__(self):return repr(self)
