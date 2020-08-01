@@ -13,7 +13,7 @@ class Event(object):
     return self.__dispatchevent(self.event,a,k)
   def __dispatchevent(self,evt,a,k):
     return evt(*a,**k)
-  def __cmp__(self,other,operator):
+  def __compareresults(self,other,operator):
     return eval("self.event %s other"%operator)
   def __repr__(self):
     return str(self.event)
