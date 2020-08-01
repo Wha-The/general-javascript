@@ -4,6 +4,9 @@ NOREPEATS = [
 "attach",
 "lastabc"
 ]
+dumpeddata={
+  "type":type
+}
 class Event(object):
   def __init__(self,dispatchevent,dispatcheventname):
     self.event = dispatchevent
@@ -29,28 +32,27 @@ class Event(object):
   def __int__(self): return int(self)
 
 def attach(*levels):
-  OriginalTypeFunction = type
+  OriginalTypeFunction = dumpeddata["type"]
   def patchedtype(instance):
     result = OriginalTypeFunction(instance)
     if OriginalTypeFunction(instance)==Event:
-      result = instance.event
+      result = OriginalTypeFunction(instance.event)
     return result
 
   for level in levels:
     for i,v in level.items():
         if callable(v) and i not in NOREPEATS:
           level[i]=Event(v,i)
-
-    # Patch type
-    if level["type"]==OriginalTypeFunction:
-      level["type"]=patchedtype
+        
+          #Patch type
+          if OriginalTypeFunction(v) == OriginalTypeFunction:
+            level[i]=patchedtype
 
 
   
 
 def abc(d): return d+5 
 lastabc = abc
-
 attach(globals())
 
-print lastabc==abc
+print abc
